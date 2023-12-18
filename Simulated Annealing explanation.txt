@@ -1,0 +1,74 @@
+for first, second in zip(coords[:-1], coords[1:]):
+    ax1.plot([first.x, second.x], [first.y, second.y], 'b')
+ax1.plot([coords[0].x, coords[-1].x], [coords[0].y, coords[-1].y], 'b')
+
+1. for first, second in zip(coords[:-1], coords[1:]):
+
+This is a for loop that iterates over pairs of consecutive elements from the coords list.
+zip(coords[:-1], coords[1:]) combines each element of coords with its consecutive element, creating pairs.
+The loop assigns each pair of elements to the variables first and second.
+
+2. ax1.plot([first.x, second.x], [first.y, second.y], 'b')
+
+This line uses the plot method of a matplotlib Axes object (ax1) to draw a line segment on a 2D plot.
+The line is drawn between the points (first.x, first.y) and (second.x, second.y).
+The third argument 'b' specifies that the line should be blue.
+
+3. ax1.plot([coords[0].x, coords[-1].x], [coords[0].y, coords[-1].y], 'b')
+
+This line connects the first and last points in the coords list to create a closed shape.
+It uses the same plot method, drawing a line from the first point to the last point.
+Again, 'b' specifies that the line should be blue.
+
+4. coords[:-1] is a Python list slicing notation. It extracts all elements of the coords list except the last one.
+
+In general, the syntax for list slicing is list[start:stop:step]. If any of these are omitted, they take on default values: start defaults to the beginning of the list, stop defaults to the end, and step defaults to 1.
+
+So, coords[:-1] means:
+
+start is not specified, so it defaults to the beginning of the list.
+stop is -1, which means it goes up to (but does not include) the element at index -1 (counting from the end of the list).
+step is not specified, so it defaults to 1.
+Therefore, coords[:-1] returns a new list containing all elements of coords except the last one. It's a way to create a sublist that excludes the last element of the original list.
+
+5. coords[1:] is another list slicing notation. It extracts all elements of the coords list starting from the second element (index 1) to the end of the list.
+
+In general, the syntax for list slicing is list[start:stop:step]. If any of these are omitted, they take on default values: start defaults to the beginning of the list, stop defaults to the end, and step defaults to 1.
+
+So, coords[1:] means:
+
+start is 1, so it starts from the second element of the list.
+stop is not specified, so it defaults to the end of the list.
+step is not specified, so it defaults to 1.
+Therefore, coords[1:] returns a new list containing all elements of coords starting from the second element. It's a way to create a sublist that excludes the first element of the original list.
+
+6. 
+coords[:-1] returns all elements of coords except the last one.
+coords[1:] returns all elements of coords except the first one.
+So, when you use zip(coords[:-1], coords[1:]), it pairs each element from coords[:-1] with the corresponding element from coords[1:]. This effectively creates pairs of consecutive elements from the original list, which is often useful for iterating over adjacent elements in a loop.
+
+If coords has 4 elements, zip(coords[:-1], coords[1:]) would create pairs like:
+
+Pair 1: (coords[0], coords[1])
+Pair 2: (coords[1], coords[2])
+Pair 3: (coords[2], coords[3])
+This allows you to iterate through consecutive pairs of coordinates in the list, which is often useful in scenarios like plotting line segments or analyzing sequential data.
+
+Purpose of 2 loops:
+Outer Loop (i in range(1000)):
+- This loop is responsible for controlling the overall iterations or "cooling steps" in simulated annealing.
+- The temperature T is reduced during each iteration, simulating the cooling process.
+- The outer loop runs for a predefined number of iterations (in this case, 1000) or until a convergence criterion is met.
+
+Inner Loop (j in range(100)):
+- This loop is nested inside the outer loop and is responsible for generating new neighboring solutions within the current temperature regime.
+- It performs local searches by exchanging two coordinates and evaluating the new solution.
+- The inner loop runs for a predefined number of iterations (in this case, 100) or until a specific condition is met.
+
+The reason for having two loops is to control the annealing process at different levels:
+
+The outer loop controls the overall annealing process, reducing the temperature and gradually accepting worse solutions over a larger number of iterations. This emulates the annealing schedule.
+
+The inner loop performs local searches at each temperature level. It randomly exchanges two coordinates to explore the solution space locally. The inner loop runs for a smaller number of iterations, and its purpose is to explore the neighborhood of the current solution and determine whether to accept a new solution based on its cost.
+
+By having these two levels of iteration, simulated annealing can balance global exploration (outer loop) and local exploitation (inner loop), making it a more robust optimization algorithm.
